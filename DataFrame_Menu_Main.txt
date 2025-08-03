@@ -1,0 +1,91 @@
+
+
+
+import java.io.*;
+import java.util.Scanner;
+
+public class Main {
+//Divvy_Trips_July2013 (1)
+  public static void main(String[] args) {
+    Scanner in = new Scanner(System.in);
+    String userInput="";
+    int collectionCounter=0;
+    boolean firstInterval=true;
+    boolean flag = true;
+    boolean test=false;
+    boolean activeDataFrame=false;
+    DataFrame a1= new DataFrame();
+     DataFrame a2 = new DataFrame();
+        DataFrame a3 = new DataFrame();
+        DataFrame a4 = new DataFrame();
+        DataFrame a5 = new DataFrame();
+        DataFrame a6 = new DataFrame();
+        DataFrame a7 = new DataFrame();
+        DataFrame a8 = new DataFrame();
+        DataFrame a9 = new DataFrame();
+        DataFrame a10 = new DataFrame();
+
+        while (flag==true) {
+
+          while (activeDataFrame==false) {
+            System.out.println("DataFrame Available: ");
+            System.out.println("Command Options: ");
+            System.out.println("i: import a new CSV");
+            System.out.println("q: quit");
+            String initialInput = in.next();
+            if (initialInput.equals("i")) {
+              a1.promptForFile(); 
+               
+                a1.loadData();
+                a1.loadData2();
+              System.out.println("Active: " + a1.getFileName() + "," + a1.getColumnHeaders() + "," + a1.getDataTypes() );
+                activeDataFrame=true;
+            } else {
+              if (initialInput.equals("q")) {
+                activeDataFrame=true;
+                flag=false;
+              }
+            }
+          }
+          if (firstInterval!=true){
+          System.out.println("DataFrame Available: " + a1.getFileName()); //add counter to count number of rows in current dataFrame
+
+          System.out.println("Command Options: ");
+              System.out.println("i: import a new CSV");
+
+              System.out.println("c: change the active DataFrame");
+              System.out.println("a: average a column");
+              System.out.println("m: find min for a column");
+              System.out.println("x: find max for a column");
+              System.out.println("f: freq table for a column");
+              System.out.println("s: subset by a column value");
+              System.out.println("z: export the active DataFrame to a CSV");
+              System.out.println("q: quit");
+              userInput=in.next();
+
+              if (userInput.equals("a")) {
+                System.out.println(a1.averageColumn());
+              }
+              if (userInput.equals("q")){
+                flag=false;
+              }
+              if (userInput.equals("x")) {
+                System.out.println(a1.findMax());
+              }
+              if(userInput.equals("m")){
+                System.out.println(a1.findMin());
+          }
+          if(userInput.equals("f")){
+                System.out.println(a1.freqTable());
+          }
+          if(userInput.equals("s")){
+                a1.subsetColumn();
+
+          }
+        }
+          firstInterval=false;
+        }
+
+  }
+
+}
